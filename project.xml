@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <meta title="Max Slider" package="com.max.slider" version="1.0.0" />
+    <app main="BannerSlider" file="BannerSlider" path="bin" />
+    
+    <window width="580" height="300" background="0xFF6600" fps="24" />
+    <target hxapp="flash" />
+
+    <source path="src" />
+    <assets path="images" rename="images" />
+</project>
