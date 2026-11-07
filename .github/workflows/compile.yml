@@ -17,6 +17,14 @@ jobs:
         with:
           haxe-version: '4.3.3'
 
+      - name: Verify Project Files
+        run: |
+          ls -la
+          if [ ! -f "project.xml" ]; then
+            echo "Error: project.xml is missing from the repository root!"
+            exit 1
+          fi
+
       - name: Configure Haxelib and Install Dependencies
         run: |
           haxelib setup --always ~/haxelib
@@ -32,4 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: banner-swf
-          path: bin/flash/bin/*.swf
+          path: |
+            bin/flash/bin/*.swf
+            Export/flash/bin/*.swf
+            bin/*.swf
