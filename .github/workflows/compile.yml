@@ -12,24 +12,24 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Haxe and Dependencies via APT
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y haxe libneko-dev
-          haxelib setup --always ~/haxelib
+      - name: Set up Haxe
+        uses: haxefoundation/setup-haxe@v3
+        with:
+          haxe-version: '4.3.3'
 
-      - name: Install OpenFL and Lime
+      - name: Configure Haxelib and Install Dependencies
         run: |
+          haxelib setup --always ~/haxelib
           haxelib install openfl --quiet
           haxelib install lime --quiet
           haxelib run lime setup -y
 
-      - name: Build SWF Target
+      - name: Build Flash SWF
         run: |
-          lime test flash -final
+          lime build flash -final
 
       - name: Upload SWF Artifact
         uses: actions/upload-artifact@v4
         with:
           name: banner-swf
-          path: bin/
+          path: bin/flash/bin/*.swf
